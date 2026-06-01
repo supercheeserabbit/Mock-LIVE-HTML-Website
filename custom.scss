@@ -99,7 +99,7 @@ div#quarto-document-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.5rem 15px;   // 15px bottom padding centers content with more space below
+  padding: 0 2.5rem 0px;   // used to be this (15px bottom padding centers content with more space below) but I'm going to see what it's like if we have 0px
   height: 92px;
   background: #fff;
   border-bottom: 1px solid #e8eaed;
@@ -236,7 +236,7 @@ div#quarto-document-content {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vh - 72px);
+  height: calc(100vh - 150px);
 }
 
 .hero-content {
