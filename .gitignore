@@ -1,0 +1,19 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Spotlight index files
+.Spotlight-V100
+.Trashes
+
+# Quarto build output (optional — remove these if you want to commit the built site)
+/_site
+/site_libs
+*_files/
+
+# R/RStudio files
+.Rhistory
+.RData
+.Rproj.user
