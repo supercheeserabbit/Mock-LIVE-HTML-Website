@@ -3,7 +3,7 @@
     "path": "~/Documents/Claude/Projects/Mock LIVE HTML Website/custom.scss",
     "project_path": "custom.scss",
     "type": "scss",
-    "hash": "0",
+    "hash": "591974605",
     "contents": "",
     "dirty": false,
     "created": 1779990413937.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "121,11",
-        "scrollLine": "107"
+        "cursorPosition": "238,26",
+        "scrollLine": "232"
     },
     "folds": "",
-    "lastKnownWriteTime": 1779997797,
+    "lastKnownWriteTime": 1780334351,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1779997797,
+    "last_content_update": 1780334351215,
     "read_only": false,
     "read_only_alternatives": []
 }

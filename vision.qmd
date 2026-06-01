@@ -1,0 +1,26 @@
+---
+title: "Our Vision"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<!-- Vision Hero -->
+<section class="vision-hero">
+  <div class="vision-hero-content">
+    <p class="vision-eyebrow">Our Vision for the Modern Student</p>
+    <h1>"Discovering the path<br>where skill meets<br>calling."</h1>
+  </div>
+</section>
+
+<!-- Vision Body -->
+<section class="vision-content">
+  <div class="vision-heading">
+    <h2>Empowering Vocation</h2>
+  </div>
+  <div class="vision-body">
+    <p>Career Insights Research envisions a future where every college student is empowered to discover a profound sense of vocation. Our long-term mission is to provide institutions with the empirical data and strategic frameworks necessary to transform career development from a transactional service into a journey of life-calling discovery.</p>
+    <p>By deepening our understanding of how students navigate their professional identities, we help partner colleges build ecosystems of support that transcend simple job placement. We strive to foster environments where vocational reflection is an integral part of the collegiate experience, ensuring graduates enter the workforce with both clarity and purpose.</p>
+  </div>
+</section>
+```
