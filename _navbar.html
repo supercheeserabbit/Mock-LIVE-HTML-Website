@@ -1,0 +1,60 @@
+<!-- Custom site navigation — shared across all pages via _quarto.yml include-before-body -->
+<nav class="site-nav">
+  <a class="nav-logo" href="index.html">
+    <img src="LIVE_logo_circle_trans.png" alt="The LIVE Project logo" class="nav-logo-img">
+    <span class="nav-logo-text">The LIVE Project</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html" data-page="index">Home</a></li>
+    <li class="nav-item">
+      <a href="#" class="has-dropdown" data-page="about">About Us</a>
+      <div class="nav-dropdown">
+        <a href="overview.html" data-page="overview">Overview</a>
+        <a href="team.html"   data-page="team">Our Team</a>
+      </div>
+    </li>
+    <li><a href="#" class="has-dropdown">Research</a></li>
+    <li><a href="#">Reports</a></li>
+  </ul>
+
+  <div class="nav-globe">🌐</div>
+</nav>
+
+<script>
+(function () {
+  // Derive the current page name from the URL (e.g. "team" from "team.html")
+  var path = window.location.pathname;
+  var page = path.split('/').pop().replace('.html', '') || 'index';
+
+  // Set .active on the matching link; if it's inside a dropdown,
+  // also mark the parent "About Us" toggle as active.
+  document.querySelectorAll('[data-page]').forEach(function (el) {
+    if (el.getAttribute('data-page') === page) {
+      el.classList.add('active');
+      var dropdown = el.closest('.nav-dropdown');
+      if (dropdown) {
+        dropdown.previousElementSibling.classList.add('active');
+      }
+    }
+  });
+
+  // Click-toggled dropdown
+  document.querySelectorAll('.nav-item > .has-dropdown').forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var item = this.parentElement;
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.nav-item').forEach(function (i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Close dropdown when clicking elsewhere on the page
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-item')) {
+      document.querySelectorAll('.nav-item').forEach(function (i) { i.classList.remove('open'); });
+    }
+  });
+})();
+</script>

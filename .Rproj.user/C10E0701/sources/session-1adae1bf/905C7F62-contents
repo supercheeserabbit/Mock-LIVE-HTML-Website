@@ -1,0 +1,93 @@
+# Client vs. Server-Side Authentication
+*Summary for project supervisors*
+
+---
+
+## What is Authentication?
+
+Authentication is the process of verifying that a user is who they claim to be before granting them access to protected content. In the context of this website, authentication means requiring users to log in before they can view institutional reports.
+
+---
+
+## The Two Main Types of Authentication
+
+### 1. Client-Only Authentication
+
+With client-only auth, the login process happens entirely in the user's web browser. When a user logs in, they receive a token (called a JWT — essentially a digital "proof of login") that is stored locally on their device. The browser then uses this token to decide what content to show.
+
+**Pros:**
+- Compatible with our current website structure (Quarto site rendered to static HTML, hosted on GitHub Pages)
+- Simpler to implement — no additional infrastructure needed
+- Supabase provides straightforward tools for this approach
+
+**Cons:**
+- **No gated routes.** A "gated route" means a page that is completely blocked at the server level before any content is sent to the browser. With client-only auth, the server sends the full page first, then JavaScript runs in the browser and checks whether the user is logged in. This means a brief window exists where content could be visible, and a technically savvy user could potentially intercept it.
+- **Static files are not protected by auth logic alone.** This is the most important limitation: if reports are stored as files in the GitHub repository and published to GitHub Pages, anyone who discovers the direct URL can access them — the login screen does not protect the files themselves, only the page that links to them.
+
+---
+
+### 2. Server-Side Authentication
+
+With server-side auth, the login verification happens on a server before anything is sent to the user's browser. The server checks whether the user is logged in, and only if they are does it send the requested page or file.
+
+**Pros:**
+- **Gated routes.** The server verifies the user's identity before sending any HTML or files. If the user is not logged in, they are redirected immediately — no content is ever transmitted to them.
+- More secure: login tokens are stored in cookies that JavaScript cannot read, reducing the risk of theft.
+- Better enforcement of data access rules.
+
+**Cons:**
+- **Not compatible with our current website structure.** GitHub Pages only serves static files — there is no server running code per request. Server-side auth requires a backend (e.g., a Node.js or Next.js server) that can execute code on every page request. Implementing this would require a significant architectural change to the website.
+
+---
+
+## Why Reports Must Not Be Stored as Static Files in the GitHub Repo
+
+If reports are stored inside the GitHub repository and published to GitHub Pages, they become publicly accessible files on the internet. Since the GitHub repository is public, this means:
+
+- Anyone who discovers or guesses a report's URL can download it directly, bypassing the login screen entirely.
+- The login screen only protects the webpage that *links to* the reports — it does not protect the report files themselves.
+
+In short, storing reports on GitHub Pages makes authentication security theater: it creates the appearance of protection without the substance of it.
+
+---
+
+## The Recommended Solution: Supabase Storage
+
+Rather than storing reports in the GitHub repo, reports should be stored in **Supabase Storage** — a secure file storage service provided by Supabase (the same platform handling user authentication). Here is how it works:
+
+1. A user visits the website and logs in.
+2. The user requests a report.
+3. The website's JavaScript uses the user's login credentials to request the file from Supabase Storage.
+4. Supabase checks whether that user is authorized to access the file before returning it.
+5. If they are not authorized, the file is not sent — and there is no public URL that bypasses this check.
+
+This means even with a public GitHub repository and a static site on GitHub Pages, the reports themselves remain secure inside Supabase and are never exposed as publicly accessible files. **One critical setup requirement: the Supabase Storage bucket must be configured as private.** If it is accidentally set to public, files would be accessible to anyone with the URL, bypassing all authentication.
+
+The `anon` (anonymous/public) key used in the website's code is designed to be safe to expose publicly — Supabase's Row Level Security (RLS) policies are what control who can actually access which files. The sensitive `service_role` key, which bypasses all security rules, is never used in the website code.
+
+---
+
+## Supabase Storage: Cost and Capacity Estimates
+
+Supabase's free tier includes **1 GB of storage**.
+
+Estimated time before reaching the free tier limit, depending on report size:
+
+| Average report size | Approximate page count | Reports per year | Years until 1 GB is full |
+|---|---|---|---|
+| 10 MB (large/image-heavy) | ~100–200 pages | 70 | ~1.5 years |
+| 5 MB (typical PDF) | ~50–100 pages | 70 | ~3 years |
+| 2 MB (text-heavy PDF) | ~20–50 pages | 70 | ~7 years |
+
+When the free tier is eventually exceeded, Supabase's Pro plan costs $25/month and includes 100 GB — far more than this project would likely need for the foreseeable future. Given the supervisor's guidance not to over-engineer at this stage, the free tier is a reasonable starting point.
+
+---
+
+## Summary Recommendation
+
+Given the current website structure (Quarto + GitHub Pages) and the stated security goal of reasonable access control for sensitive-but-not-classified institutional reports, the recommended approach is:
+
+- **Client-only authentication** via Supabase for user login
+- **Supabase Storage** (not GitHub Pages) for storing all reports, with access rules configured so only authenticated users can retrieve files
+
+This approach requires no new infrastructure, fits within Supabase's free tier, and provides meaningful protection appropriate to the sensitivity level of the data.

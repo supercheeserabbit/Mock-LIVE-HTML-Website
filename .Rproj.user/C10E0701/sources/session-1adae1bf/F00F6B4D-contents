@@ -1,0 +1,23 @@
+---
+title: "The LIVE Project"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Lorum Ipsum Dolor</p>
+    <h1>Cultivating Vocational Exploration</h1>
+    <p>The LIVE (Longitudinal Investigation of Vocational Exploration) Project is a new landmark study commissioned by the Network for Vocation in Undergraduate Education (NetVUE) with support from the Lilly Endowment Inc.</p>
+    <a href="overview.html" class="btn-primary">Learn More</a>
+  </div>
+  <div class="hero-image">
+    <img
+      src="https://images.unsplash.com/photo-1562774053-701939374585?w=900&q=80"
+      alt="Modern academic building exterior"
+    >
+  </div>
+</section>
+```
