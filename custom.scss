@@ -4,9 +4,9 @@
 $font-family-sans-serif: 'Instrument Sans', sans-serif;
 $headings-font-family:    'Fraunces', serif;
 $body-color:              #1a2340;
-$link-color:              #b8874e;
-$link-hover-color:        #9e7040;
-$primary:                 #b8874e;
+$link-color:              #5fa936; 
+$link-hover-color:        #4A8A26;
+$primary:                 #5fa936;
 $border-radius:           0;        // flat/square corners throughout
 
 
@@ -149,7 +149,7 @@ div#quarto-document-content {
   transition: color 0.2s;
 }
 
-.nav-links a:hover { color: #b8874e; }
+.nav-links a:hover { color: #5fa936; }
 
 .nav-links .active {
   text-decoration: underline;
@@ -195,7 +195,7 @@ div#quarto-document-content {
   text-decoration: none;
 }
 
-.nav-dropdown a:hover { color: #b8874e; }
+.nav-dropdown a:hover { color: #5fa936; }
 
 .nav-dropdown a.active {
   text-decoration: underline;
@@ -213,7 +213,7 @@ div#quarto-document-content {
 
 .btn-primary {
   display: inline-block;
-  background: #b8874e;
+  background: #5fa936;
   color: #fff !important;
   padding: 0.6rem 1.4rem;
   text-decoration: none !important;
@@ -228,7 +228,7 @@ div#quarto-document-content {
   width: fit-content;
 }
 
-.btn-primary:hover { background: #9e7040; }
+.btn-primary:hover { background: #4A8A26; }
 
 
 // ── Homepage — Hero ───────────────────────────────────────────────────────────
@@ -236,7 +236,7 @@ div#quarto-document-content {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: calc(100vh - 167px);
+  height: calc(100vh - 92px);
 }
 
 .hero-content {
@@ -325,7 +325,7 @@ div#quarto-document-content {
 .quote-mark {
   font-family: 'Fraunces', serif;
   font-size: 2.8rem;
-  color: #b8874e;
+  color: #5fa936;
   line-height: 0.9;
   margin-bottom: 0.85rem;
 }
@@ -403,7 +403,7 @@ div#quarto-document-content {
 
 .research-card a.read-link {
   font-size: 0.81rem;
-  color: #b8874e;
+  color: #5fa936;
   text-decoration: none;
   font-weight: 500;
 }
@@ -651,7 +651,7 @@ div#quarto-document-content {
   font-weight: 500;
 }
 
-.footer-email:hover { color: #b8874e; }
+.footer-email:hover { color: #5fa936; }
 
 .footer-linkedin {
   display: flex;
