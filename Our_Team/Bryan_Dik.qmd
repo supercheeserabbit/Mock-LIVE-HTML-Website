@@ -1,0 +1,27 @@
+---
+title: "Bryan Dik"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
+  <!-- Left column: image + textbox stacked -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0;">
+  <img src="/Images/Bryan-Dik.jpg" style="width: 220px; border-radius: 4px;">
+    <div style="width: 220px; background: #f5f5f7; padding: 0.75rem 1rem; font-size: 0.9rem; color: #4a5568; border-left: 3px solid #b8874e;">
+      <a href="mailto:bryan.dik@colostate.edu">bryan.dik@colostate.edu</a>
+    </div>
+  </div>
+
+  <div>
+    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Bryan Dik</h1>
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
+    Principal Investigator and Director
+    </p>
+    <p>Bryan J. Dik, Ph.D., is Professor and Associate Chair of Psychology at Colorado State University and Director of the LIVE Project. He also holds an honorary appointment as Extraordinary Professor at North-West University in South Africa. Bryan is co-inventor of PathwayU, a leading online career assessment platform. He was co-founder and Chief Science Officer of jobZology, the company that developed PathwayU, until its acquisition by PeopleGrove in 2023.</p>
+    <p>A vocational psychologist, Bryan's research focuses on career development, especially work as a calling, meaning and purpose in career decision-making and planning, and the intersection of faith and work.  He has published widely on these topics and has served on the editorial boards of eight research journals, including the <i>Journal of Vocational Behavior</i> and the <i>Journal of Career Assessment</i>.</p>
+    <p>Bryan is a recipient of the John Holland Award for Outstanding Achievement in Career or Personality Research (from APA Div. 17) and the Applied Psychology of Religion and Spirituality Award (from APA Div. 36). He has published four books: <i>Redeeming Work</i> (Templeton Press, 2020), <i>Purpose and Meaning in the Workplace</i> (American Psychological Association Books, 2013), <i>Make Your Job a Calling</i> (Templeton Press, 2012), and <i>Psychology of Religion and Workplace Spirituality</i> (Information Age Publishing, 2012). Bryan also mentors PhD students and teaches courses at CSU in the areas of vocational psychology, personality psychology, and the psychology of religion.</p>
+  </div>
+</div>
+```

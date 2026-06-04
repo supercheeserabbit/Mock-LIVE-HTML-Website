@@ -1,0 +1,25 @@
+---
+title: "Kyle Inselman"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
+  <!-- Left column: image + textbox stacked -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0;">
+    <img src="/Images/Kyle-Inselman.jpg" style="width: 220px; border-radius: 4px;">
+    <div style="width: 220px; background: #f5f5f7; padding: 0.75rem 1rem; font-size: 0.9rem; color: #4a5568; border-left: 3px solid #b8874e;">
+      <a href="mailto:kyle.inselman@colostate.edu">kyle.inselman@colostate.edu</a>
+    </div>
+  </div>
+
+  <div>
+    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Kyle Inselman</h1>
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
+    Project Manager and Graduate Research Assistant
+    </p>
+    <p>Kyle M. Inselman, M.A., M.Ed., CCSP, is the Project Manager for the LIVE Project, and a first-year Ph.D. student in Industrial-Organizational Psychology at Colorado State University. His research focuses on calling, career development, and meaningful work. Prior to beginning his doctoral studies, he worked in higher ed. career services for 11 years, with experience in undergraduate advising and alumni career development. He holds an M.A. in Religious Studies and an ME.d. in Educational Leadership & Policy. He is a past-president of the Collegiate Career Services Association of Colorado/Wyoming and received the 2022 Diversity Initiative Award from the Colorado Career Development Association. Passionate about career development and meaningful work, in addition to his Ph.D. program Kyle also maintains an independent career coaching practice, Pride in Your Path, LLC.</p>
+  </div>
+</div>
+```

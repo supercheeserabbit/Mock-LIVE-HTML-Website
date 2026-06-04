@@ -1,0 +1,192 @@
+---
+title: "reports"
+format: html
+---
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const { createClient } = supabase;
+  const client = createClient(
+    'https://plsrkfhxfzwzvrtciios.supabase.co',
+    'sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ'
+  );
+
+  async function checkAuthBeforeLoad() {
+    const { data: { session } } = await client.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html?redirect=reports.html';
+    }
+  }
+  
+  checkAuthBeforeLoad();
+</script>
+
+<style>
+  body {
+    background-color: #f0f0ef;
+  }
+
+  .reports-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    font-family: 'Georgia', serif;
+  }
+
+  .reports-page h1.page-title {
+    font-size: 3rem;
+    font-weight: 400;
+    color: #0d1f3c;
+    text-align: center;
+    margin-bottom: 16px;
+    font-family: 'Georgia', serif;
+  }
+
+  .reports-page .page-subtitle {
+    text-align: center;
+    color: #0d1f3c;
+    font-size: 1rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    max-width: 560px;
+    margin: 0 auto 56px auto;
+    line-height: 1.6;
+  }
+
+  .reports-year-section {
+    margin-bottom: 48px;
+  }
+
+  .reports-year-heading {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #0d1f3c;
+    font-family: 'Georgia', serif;
+    margin-bottom: 16px;
+  }
+
+  .report-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #c8c8c8;
+  }
+
+  .report-name {
+    font-size: 1.15rem;
+    color: #0d1f3c;
+    font-family: sans-serif;
+    font-weight: 400;
+  }
+
+  .report-actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .report-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0d1f3c;
+    font-size: 0.95rem;
+    font-family: sans-serif;
+    font-weight: 400;
+    padding: 0;
+    text-decoration: none;
+  }
+
+  .report-btn:hover {
+    opacity: 0.7;
+  }
+
+  .report-btn svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+</style>
+
+<div class="reports-page">
+  <h1 class="page-title">Reports for &lt;college&gt;</h1>
+  <p class="page-subtitle">Download your reports as PDFs, or use the HTML dashboards to interact with specific elements of your data.</p>
+
+  <div class="reports-year-section">
+    <div class="reports-year-heading">2025 - 2026</div>
+
+    <div class="report-row">
+      <span class="report-name">Institutional Report Cohort 1</span>
+      <div class="report-actions">
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v13M7 11l5 5 5-5"/>
+            <path d="M5 21h14"/>
+          </svg>
+          Download PDF
+        </a>
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          View Dashboard
+        </a>
+      </div>
+    </div>
+
+    <div class="report-row">
+      <span class="report-name">Institutional Report Cohort 2</span>
+      <div class="report-actions">
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v13M7 11l5 5 5-5"/>
+            <path d="M5 21h14"/>
+          </svg>
+          Download PDF
+        </a>
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          View Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="reports-year-section">
+    <div class="reports-year-heading">2024 - 2025</div>
+
+    <div class="report-row">
+      <span class="report-name">Institutional Report Cohort 1</span>
+      <div class="report-actions">
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v13M7 11l5 5 5-5"/>
+            <path d="M5 21h14"/>
+          </svg>
+          Download PDF
+        </a>
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          View Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+  checkAuthStatus();
+</script>

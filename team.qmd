@@ -7,54 +7,105 @@ toc: false
 ```{=html}
 <!-- Team Header -->
 <section class="team-header">
-  <h2>The Research Collective</h2>
-  <p>Leading the academic mission to bridge the gap between student vocation and institutional support systems.</p>
+  <h2>Our Team</h2>
 </section>
 
 <!-- Team Grid -->
 <div class="team-grid">
 
   <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="Elena Rodriguez">
-    <h3>Elena Rodriguez</h3>
-    <p class="role">Lead Researcher</p>
-    <p class="bio">Short bio about Elena Rodriguez highlighting role and background.</p>
+    <img src="Images/Bryan-Dik.jpg" alt="Bryan Dik">
+    <h3><a href="/Our_Team/Bryan_Dik.qmd">Bryan Dik, Ph.D.</a></h3>
+    <p class="role">Principal Investigator & Director</p>
   </div>
 
   <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="Dr. Marcus Thorne">
-    <h3>Dr. Marcus Thorne</h3>
-    <p class="role">Senior Associate</p>
-    <p class="bio">Short bio about Dr. Marcus Thorne highlighting role and background.</p>
+    <img src="Images/Denise-Daniels.jpg" alt="Denise Daniels">
+    <h3><a href="/Our_Team/Denise_Daniels.qmd">Denise Daniels, Ph.D.</a></h3>
+    <p class="role">Co-Principal Investigator</p>
   </div>
 
   <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="Sarah Jenkins">
-    <h3>Sarah Jenkins</h3>
-    <p class="role">Research Fellow</p>
-    <p class="bio">Short bio about Sarah Jenkins highlighting role and background.</p>
+    <img src="Images/Ryan-Duffy.jpg" alt="Ryan Duffy">
+    <h3><a href="/Our_Team/Ryan_Duffy.qmd">Ryan Duffy, Ph.D.</a></h3>
+    <p class="role">Co-Principal Investigator</p>
   </div>
 
   <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&q=80" alt="Dr. Julian Vance">
-    <h3>Dr. Julian Vance</h3>
-    <p class="role">Director of Studies</p>
-    <p class="bio">Short bio about Dr. Julian Vance highlighting role and background.</p>
+    <img src="Images/Kyle-Inselman.jpg" alt="Kyle Inselman">
+    <h3><a href="/Our_Team/Kyle_Inselman.qmd">Kyle Inselman</a></h3>
+    <p class="role">Project Manager</p>
+  </div>
+</div>
+
+<!-- Collaborators -->
+<section class="team-header">
+  <h3>Collaborators</h3>
+</section>
+
+<!-- Grid -->
+<div class="team-grid">
+
+  <div class="team-member">
+    <img src="Images/Josh-Prasad.jpg" alt="Josh Prasad">
+    <h3><a href="/Our_Team/Josh_Prasad.qmd">Josh Prasad, Ph.D.</a></h3>
+    <p class="role">Senior Research Scientist</p>
   </div>
 
   <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80" alt="Dr. Amara Okoro">
-    <h3>Dr. Amara Okoro</h3>
-    <p class="role">Senior Researcher</p>
-    <p class="bio">Short bio about Dr. Amara Okoro highlighting role and background.</p>
+    <img src="" alt="Allie Alayan">
+    <h3><a href="/Our_Team/Allie_Alayan.qmd">Allie Alayan</a></h3>
+    <p class="role">Research Scientist</p>
   </div>
 
-  <div class="team-member">
-    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80" alt="Robert Chen">
-    <h3>Robert Chen</h3>
+<div class="team-member">
+    <img src="Images/Dylan-Marsh.jpg" alt="Dylan Marsh">
+    <h3><a href="/Our_Team/Dylan_Marsh.qmd">Dylan Marsh</a></h3>
     <p class="role">Research Associate</p>
-    <p class="bio">Short bio about Robert Chen highlighting role and background.</p>
+  </div>
+</div>
+
+<!-- Research Assistants -->
+<section class="team-header">
+  <h3>Research Assistants</h3>
+</section>
+
+<!-- Grid -->
+<div class="team-grid">
+  <div class="team-member">
+    <img src="" alt="Emily Budik">
+    <h3><a href="/Our_Team/Emily_Budik.qmd">Emily Budik</a></h3>
+    <p class="role">Graduate Research Assistant</p>
+  </div>
+  
+  <div class="team-member">
+    <img src="Images/Savannah-Jeffery.jpg" alt="Savannah Jeffery">
+    <h3><a href="/Our_Team/Savannah_Jeffery.qmd">Savannah Jeffery</a></h3>
+    <p class="role">Undergraduate Research Assistant</p>
+  </div>
+  
+  <div class="team-member">
+    <img src="Images/Ines-Kim.jpg" alt="Ines Kim">
+    <h3><a href="/Our_Team/Ines_Kim.qmd">Ines Kim</a></h3>
+    <p class="role">Undergraduate Research Assistant</p>
   </div>
 
+  <div class="team-member">
+    <img src="Images/Tenzin-Nyima.jpg" alt="Tenzin Nyima">
+    <h3><a href="/Our_Team/Tenzin_Nyima.qmd">Tenzin Nyima</a></h3>
+    <p class="role">Graduate Research Assistant</p>
+  </div>
+
+  <div class="team-member">
+    <img src="Images/Danielle-West.jpg" alt="Danielle West">
+    <h3><a href="/Our_Team/Danielle_West.qmd">Danielle West</a></h3>
+    <p class="role">Graduate Research Assistant</p>
+  </div>
+
+  <div class="team-member">
+    <img src="Images/Malory-Wissing.jpg" alt="Malory Wissing">
+    <h3><a href="/Our_Team/Malory_Wissing.qmd">Malory Wissing</a></h3>
+    <p class="role">Graduate Research Assistant</p>
+  </div>
 </div>
 ```

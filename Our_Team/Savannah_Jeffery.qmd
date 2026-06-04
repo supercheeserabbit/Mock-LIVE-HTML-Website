@@ -1,0 +1,18 @@
+---
+title: "Savannah Jeffery"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
+  <img src="/Images/Savannah-Jeffery.jpg" style="width: 220px; border-radius: 4px; flex-shrink: 0;">
+  <div>
+    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Savannah Jeffery</h1>
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
+    Undergraduate Research Assistant
+    </p>
+    <p>Savannah Jeffery, B.A., earned her Bachelor’s degree from Wheaton College (IL) in December 2025 in Business/Economics with a minor in Entrepreneurship. Her experiences ranges from international research presentations to nonprofit involvement, study abroad, and deep dives into the theology of business. She is particularly interested in the intersection of data integrity and mission-driven development, exploring how vocational calling and purpose develop throughout the undergraduate experience.</p>
+  </div>
+</div>
+```

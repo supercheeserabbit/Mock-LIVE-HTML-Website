@@ -1,0 +1,27 @@
+---
+title: "Denise Daniels"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
+  <!-- Left column: image + textbox stacked -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0;">
+  <img src="/Images/Denise-Daniels.jpg" style="width: 220px; border-radius: 4px;">
+    <div style="width: 220px; background: #f5f5f7; padding: 0.75rem 1rem; font-size: 0.9rem; color: #4a5568; border-left: 3px solid #b8874e;">
+      <a href="mailto:denise.daniels@wheaton.edu">denise.daniels@wheaton.edu</a>
+    </div>
+  </div>
+
+  <div>
+    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Denise Daniels</h1>
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
+    Co-Principal Investigator
+    </p>
+    <p>Denise Daniels, Ph.D., is the inaugural Hudson T. Harrison Endowed Chair of Entrepreneurship at Wheaton College (IL). Previously she was a Professor of Management at Seattle Pacific University, where she also served as the Associate Dean and Interim Dean in the School of Business, Government, and Economics (SBGE), and as the university’s Associate Vice President for Strategic Initiatives.</p>
+    <p>Her scholarly interests include meaningful work, Sabbath, leadership, gender, and motivation. She has co-authored several books, including <i>Working for Better</i> (IVP, 2025), <i>Working in the Presence of God: Spiritual Practices for Everyday Work</i> (Hendrickson, 2019), and <i>Religion in a Changing Workplace</i> (Oxford, 2024). The two most recent books are based on a 5-year $1.8 million research project on which she was the co-principal investigator, examining how people in the United States understand and engage their faith at work.</p>
+    <p>Denise is an outside board member for Investortools, a FinTech company creating investment system solutions for institutional investors. She also serves on the board of the Theology of Work Project, an independent international non-profit that creates and curates biblical, theological, and pastoral resources related to work.</p>
+  </div>
+</div>
+```

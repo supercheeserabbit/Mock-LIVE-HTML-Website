@@ -1,0 +1,25 @@
+---
+title: "Danielle West"
+page-layout: custom
+toc: false
+---
+
+```{=html}
+<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
+  <!-- Left column: image + textbox stacked -->
+  <div style="display: flex; flex-direction: column; gap: 0.75rem; flex-shrink: 0;">
+  <img src="/Images/Danielle-West.jpg" style="width: 220px; border-radius: 4px;">
+    <div style="width: 220px; background: #f5f5f7; padding: 0.75rem 1rem; font-size: 0.9rem; color: #4a5568; border-left: 3px solid #b8874e;">
+      <a href="mailto:danielle.west@colostate.edu">danielle.west@colostate.edu</a>
+    </div>
+  </div>
+
+  <div>
+    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Danielle West</h1>
+    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
+    Graduate Research Assistant
+    </p>
+    <p>Danielle West, M.S., is a third-year Ph.D. student at Colorado State University in the Industrial-Organizational Psychology program. She earned her Master of Science in Industrial and Organizational Psychology from Colorado State University in 2025. Danielle's research interests include occupational health psychology, individual differences at work, and vocational psychology.</p>
+  </div>
+</div>
+```
