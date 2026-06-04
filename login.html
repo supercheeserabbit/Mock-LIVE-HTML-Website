@@ -161,7 +161,7 @@
 
     // ── Redirect if already logged in ───────────────────────────────────────
     sb.auth.getSession().then(({ data: { session } }) => {
-      if (session) window.location.href = '/report.html'; // change to your protected page
+      if (session) window.location.href = '/reports.html'; // change to your protected page
     });
 
     // ── Login form handler ───────────────────────────────────────────────────
@@ -186,7 +186,7 @@
         btn.disabled = false;
         btn.textContent = 'Sign In';
       } else {
-        window.location.href = '/report.html'; // change to your protected page
+        window.location.href = '/reports.html'; // change to your protected page
       }
     });
   </script>
