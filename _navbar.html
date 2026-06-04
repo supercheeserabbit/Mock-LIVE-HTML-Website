@@ -19,12 +19,33 @@
   </ul>
 
   <div class="nav-links">
-    <a href="/login.html" data-page="login">Login</a>  
+    <a href="/login.html" id="auth-link" data-page="login">Login</a>
   </div>
 </nav>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function () {
+  // ── Supabase auth: toggle Login / Log Out ──────────────────────────────
+  const { createClient } = supabase;
+  const sb = createClient(
+    'https://plsrkfhxfzwzvrtciios.supabase.co',
+    'sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ'  
+  );
+
+  sb.auth.getSession().then(({ data: { session } }) => {
+    const link = document.getElementById('auth-link');
+    if (session) {
+      link.textContent = 'Log Out';
+      link.href = '#';
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await sb.auth.signOut();
+        window.location.href = 'https://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/login.html';
+      });
+    }
+  });
+
   // Derive the current page name from the URL (e.g. "team" from "team.html")
   var path = window.location.pathname;
   var page = path.split('/').pop().replace('.html', '') || 'index';
