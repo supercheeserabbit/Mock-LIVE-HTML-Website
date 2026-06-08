@@ -187,6 +187,19 @@ ul.task-list li input[type="checkbox"] {
     const { data: { session } } = await client.auth.getSession();
     if (!session) {
       window.location.href = 'login.html?redirect=reports.html';
+      return;
+    }
+
+    // Fetch institution from user profile
+    const { data: profile } = await client
+      .from('user_profiles')
+      .select('institution')      // ← adjust column name if different
+      .eq('id', session.user.id)
+      .single();
+
+    if (profile?.institution) {
+      document.querySelector('.page-title').textContent =
+        'Reports for ' + profile.institution;
     }
   }
 

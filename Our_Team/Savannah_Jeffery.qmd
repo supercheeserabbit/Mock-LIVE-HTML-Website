@@ -12,7 +12,7 @@ toc: false
     <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
     Undergraduate Research Assistant
     </p>
-    <p>Savannah Jeffery, B.A., earned her Bachelor’s degree from Wheaton College (IL) in December 2025 in Business/Economics with a minor in Entrepreneurship. Her experiences ranges from international research presentations to nonprofit involvement, study abroad, and deep dives into the theology of business. She is particularly interested in the intersection of data integrity and mission-driven development, exploring how vocational calling and purpose develop throughout the undergraduate experience.</p>
+    <p>Savannah Jeffery, B.A., holds a Bachelor of Arts in Business and Economics with a minor in Entrepreneurship from Wheaton College (IL), completed in December 2025. Her research background includes international presentations, nonprofit engagement, and study abroad. Savannah is passionate about mission-driven development and marketing, with a specific interest in how vocational calling and purpose evolve throughout the undergraduate experience.</p>
   </div>
 </div>
 ```

@@ -12,7 +12,7 @@ toc: false
     <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
     Undergraduate Research Assistant
     </p>
-    <p>Ines Kim is a rising sophomore at Wheaton College (IL), where she is pursuing a Bachelor of Arts in Philosophy and Economics. She is a Politics, Philosophy, and Economics fellow in the Aequitas Fellows Program, a highly selective, four-year academic fellowship program at Wheaton College. A staff writer for the Wheaton Record, Ines is also a writer and cabinet member for the Wheaton College Journal of Law and Public Policy. After reading Dorothy Sayer's essay "Why Work?", Ines was inspired to examine her own philosophy towards work, which sparked an interest in understanding the various attitudes regarding work and calling among the current population that continues to this day.</p>
+    <p>Ines Kim is a rising sophomore at Wheaton College (IL), where she is pursuing a Bachelor of Arts in Philosophy and Economics. She is a Politics, Philosophy, and Economics fellow in the Aequitas Fellows Program, a highly selective, four-year academic fellowship program at Wheaton College. A staff writer for the Wheaton Record, Ines is also a writer and cabinet member for the Wheaton College Journal of Law and Public Policy. After reading Dorothy Sayer's essay "Why Work?", she was inspired to different philosophies regarding work, sparking an interest in the field of work and calling that continues to this day.</p>
     </div>
 </div>
 ```

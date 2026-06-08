@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
+    "title": "The LIVE Project",
+    "section": "1. Invite a user (admin step)",
+    "text": "1. Invite a user (admin step)\nGo to Supabase Dashboard → Authentication → Users → Invite User, enter the user’s email, and click Send Invite. Supabase will email them a link automatically.\nIf you also want to store first name, last name, and institution, you can manually insert a row into the profiles table (see step 2) after inviting them."
+  },
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
+    "title": "The LIVE Project",
+    "section": "2. (Optional) Create a profiles table",
+    "text": "2. (Optional) Create a profiles table\nIf you want to store additional user info (name, institution), run this in Supabase Dashboard → SQL Editor:\ncreate table public.profiles (\n  id          uuid primary key references auth.users(id) on delete cascade,\n  first_name  text not null,\n  last_name   text not null,\n  institution text not null,\n  email       text not null,\n  created_at  timestamptz default now()\n);\n\nalter table public.profiles enable row level security;\n\ncreate policy \"Users can read own profile\"\n  on public.profiles for select\n  using (auth.uid() = id);\nAfter inviting a user, go to Table Editor → profiles and insert their details manually."
+  },
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
+    "title": "The LIVE Project",
+    "section": "3. Add the invite redirect URL to Supabase",
+    "text": "3. Add the invite redirect URL to Supabase\nGo to Supabase Dashboard → Authentication → URL Configuration → Redirect URLs and add:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/setpassword.html\nAlso set Site URL to:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/\nThis ensures the invite email link lands on setpassword.html instead of Supabase’s default page."
+  },
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-mailtrap",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-mailtrap",
+    "title": "The LIVE Project",
+    "section": "4. Configure email via Mailtrap",
+    "text": "4. Configure email via Mailtrap\nSupabase’s built-in email is limited to ~2 invites/hour. Use Mailtrap’s Email Sending service (not the sandbox/testing inbox) to remove that limit.\n\nImportant: Mailtrap has two products — Email Testing (catches emails in a sandbox) and Email Sending (delivers to real inboxes). You need Email Sending for users to actually receive invites.\n\n\nSteps\n\nSign up at mailtrap.io and go to Email Sending → Domains\nAdd and verify your sending domain (e.g., yourdomain.com)\nGo to Email Sending → SMTP/API Settings and copy your SMTP credentials\nIn Supabase Dashboard → Authentication → SMTP Settings:\n\nToggle Enable Custom SMTP on\nHost: live.smtp.mailtrap.io\nPort: 587\nUsername: api\nPassword: your Mailtrap API token\nSender email: a verified address from your Mailtrap domain (e.g., noreply@yourdomain.com)\nSender name: whatever you want users to see (e.g., Work as Calling Research)\n\nSave and send a test invite to confirm delivery"
+  },
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
+    "title": "The LIVE Project",
+    "section": "5. Verify the flow",
+    "text": "5. Verify the flow\n\nAdmin goes to Supabase Dashboard → Authentication → Users → Invite User and enters the user’s email\nUser receives the invite email → clicks the link → lands on setpassword.html\nUser sets their password → automatically redirected to reports.html\nCheck Authentication → Users to confirm the account is active"
+  },
+  {
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#files",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#files",
+    "title": "The LIVE Project",
+    "section": "Files",
+    "text": "Files\n\n\n\n\n\n\n\nFile\nPurpose\n\n\n\n\nsetpassword.html\nUser-facing page for setting password via invite link"
+  }
+]
