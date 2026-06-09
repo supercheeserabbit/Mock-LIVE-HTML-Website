@@ -1,44 +1,114 @@
 [
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#invite-a-user-admin-step",
     "title": "The LIVE Project",
     "section": "1. Invite a user (admin step)",
     "text": "1. Invite a user (admin step)\nGo to Supabase Dashboard → Authentication → Users → Invite User, enter the user’s email, and click Send Invite. Supabase will email them a link automatically.\nIf you also want to store first name, last name, and institution, you can manually insert a row into the profiles table (see step 2) after inviting them."
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#optional-create-a-profiles-table",
     "title": "The LIVE Project",
     "section": "2. (Optional) Create a profiles table",
     "text": "2. (Optional) Create a profiles table\nIf you want to store additional user info (name, institution), run this in Supabase Dashboard → SQL Editor:\ncreate table public.profiles (\n  id          uuid primary key references auth.users(id) on delete cascade,\n  first_name  text not null,\n  last_name   text not null,\n  institution text not null,\n  email       text not null,\n  created_at  timestamptz default now()\n);\n\nalter table public.profiles enable row level security;\n\ncreate policy \"Users can read own profile\"\n  on public.profiles for select\n  using (auth.uid() = id);\nAfter inviting a user, go to Table Editor → profiles and insert their details manually."
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#add-the-invite-redirect-url-to-supabase",
     "title": "The LIVE Project",
     "section": "3. Add the invite redirect URL to Supabase",
     "text": "3. Add the invite redirect URL to Supabase\nGo to Supabase Dashboard → Authentication → URL Configuration → Redirect URLs and add:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/setpassword.html\nAlso set Site URL to:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/\nThis ensures the invite email link lands on setpassword.html instead of Supabase’s default page."
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
     "title": "The LIVE Project",
     "section": "4. Configure email via Resend",
     "text": "4. Configure email via Resend\nSupabase’s built-in email is limited to ~2 invites/hour. Use Resend to remove that limit (free tier: 3,000 emails/month). Requires a real domain you own.\n\nSteps\n\nSign up at resend.com and go to Domains → Add Domain\nAdd and verify your sending domain (e.g., yourdomain.com) by adding the DNS records Resend provides\nGo to API Keys → Create API Key and copy it\nIn Supabase Dashboard → Authentication → SMTP Settings:\n\nToggle Enable Custom SMTP on\nHost: smtp.resend.com\nPort: 465\nUsername: resend\nPassword: your Resend API key\nSender email: a verified address from your domain (e.g., noreply@yourdomain.com)\nSender name: whatever you want users to see (e.g., Work as Calling Research)\n\nSave and send a test invite to confirm delivery"
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
     "title": "The LIVE Project",
     "section": "5. Verify the flow",
     "text": "5. Verify the flow\n\nAdmin goes to Supabase Dashboard → Authentication → Users → Invite User and enters the user’s email\nUser receives the invite email → clicks the link → lands on setpassword.html\nUser sets their password → automatically redirected to reports.html\nCheck Authentication → Users to confirm the account is active"
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#files",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#files",
+    "objectID": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#files",
+    "href": "Claude instruction files/ACCOUNT_SETUP_INSTRUCTIONS.html#files",
     "title": "The LIVE Project",
     "section": "Files",
     "text": "Files\n\n\n\n\n\n\n\nFile\nPurpose\n\n\n\n\nsetpassword.html\nUser-facing page for setting password via invite link"
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-1-request-cpanel-access-start-this-first-it-waits-on-your-supervisor",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-1-request-cpanel-access-start-this-first-it-waits-on-your-supervisor",
+    "title": "The LIVE Project",
+    "section": "Phase 1 — Request cPanel access (start this first, it waits on your supervisor)",
+    "text": "Phase 1 — Request cPanel access (start this first, it waits on your supervisor)\nDo this before anything else, because it depends on someone else responding and it unblocks both deployment (Phase 6) and the DNS records (Phase 7) — and DNS can take 24–48h to propagate, so the sooner the better. You can work through the other phases while you wait. You don’t need a new hosting account, and you should NOT share your supervisor’s main cPanel password.\n\nAsk your supervisor to create you a Team User in cPanel (Manage Team → Create Team User).\nRequest these privileges explicitly: the Web role (covers Git Version Control + File Manager) plus Git and Zone Editor access.\n\nIf Zone Editor can’t be granted to a team user, that’s fine — he can paste in the few DNS records for you (see Phase 7)."
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-2-move-the-code-to-the-projects-github-org",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-2-move-the-code-to-the-projects-github-org",
+    "title": "The LIVE Project",
+    "section": "Phase 2 — Move the code to the project’s GitHub org",
+    "text": "Phase 2 — Move the code to the project’s GitHub org\n\nIn RStudio, open the Terminal tab (Tools → Terminal → New Terminal — this is the shell, NOT the Console, which runs R). Confirm you’re in the project folder:\npwd        # should show your project path\ngit status # should list your files, not an error\nAdd the org repo as a remote and push your code:\ngit remote add live https://github.com/theliveproject/theliveproject.github.io.git\ngit remote -v            # confirm \"origin\" AND \"live\" are both listed\ngit push live main       # use your real branch; if Git complains the repo isn't empty, see note\n\nNote: if the org repo already has placeholder content, either merge once, or force-push if it’s just an empty starter: git push live main --force.\n\nFrom now on, the theliveproject repo is your source of truth."
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-3-create-the-live-project-resend-account-and-verify-the-domain",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-3-create-the-live-project-resend-account-and-verify-the-domain",
+    "title": "The LIVE Project",
+    "section": "Phase 3 — Create the LIVE Project Resend account and verify the domain",
+    "text": "Phase 3 — Create the LIVE Project Resend account and verify the domain\nSet up a fresh Resend account owned by the LIVE project (not personal), so the next phase can wire its API key into Supabase. Do the domain verification steps as early as possible — DNS propagation can take 24–48 hours.\n\nCreate the official account at resend.com, ideally using a LIVE-project email (or one a supervisor controls) so it’s not tied to your personal account. The free tier (3,000 emails/month) is plenty for invites.\nCreate an API key: Resend → API Keys → Create API Key, and copy it somewhere safe — you’ll paste it into Supabase in Phase 4.\nCreate a subdomain for sending email (e.g., mail.YOURDOMAIN.com). This isolates your transactional email reputation from your main domain and avoids DNS conflicts if you ever add another email provider. You or your supervisor can create it in cPanel → Domains → Create a New Domain (or Subdomains), then use mail.YOURDOMAIN.com as the domain in the next step.\nIn Resend → Domains → Add Domain, enter mail.YOURDOMAIN.com (your new subdomain). Resend gives you a set of TXT/CNAME/DKIM records.\nIn cPanel → Domains → Zone Editor → Manage (your domain) → Add Record, paste each record Resend provided. Save.\nDNS changes can take up to 24–48 hours to propagate. Once Resend shows the domain as verified, the SMTP settings from Phase 4 step 4 will send successfully."
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-4-create-the-official-supabase-project",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-4-create-the-official-supabase-project",
+    "title": "The LIVE Project",
+    "section": "Phase 4 — Create the official Supabase project",
+    "text": "Phase 4 — Create the official Supabase project\nYour current Supabase project is personal/mock. Create a fresh one owned by the LIVE project so it’s official and not tied to your personal account.\n\nCreate the project. At supabase.com, ideally under a LIVE-project organization/account (or one a supervisor owns), click New Project. Pick a name (e.g. live-project), set a strong database password, and choose a region close to your users.\nRecreate the database schema. In SQL Editor, run the profiles table setup from your existing ACCOUNT_SETUP_INSTRUCTIONS.md (the create table public.profiles ... block and its row-level-security policy).\nSet the auth URLs. In Authentication → URL Configuration:\n\nSite URL: https://YOURDOMAIN.com/\nRedirect URLs: add https://YOURDOMAIN.com/setpassword.html\n\nConfigure email (SMTP via Resend). In Authentication → SMTP Settings, enable custom SMTP: host smtp.resend.com, port 465, username resend, password = the Resend API key from Phase 3, sender noreply@mail.YOURDOMAIN.com. (Emails will actually send once the Resend domain is verified in Phase 7.)\nCopy the new credentials. Go to Settings → API and copy the new Project URL and the publishable/anon key. You’ll paste these into the code in Phase 5.\nNote on data: since the old project was mock, you’re starting users fresh — you’ll re-invite real users in Phase 8. (If you ever need to carry data over, export/import via the SQL Editor.)"
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-5-prepare-the-code-new-domain-new-supabase-project",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-5-prepare-the-code-new-domain-new-supabase-project",
+    "title": "The LIVE Project",
+    "section": "Phase 5 — Prepare the code (new domain + new Supabase project)",
+    "text": "Phase 5 — Prepare the code (new domain + new Supabase project)\n\nSwap the domain URLs. Search the project for https://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/ and change to https://YOURDOMAIN.com/ in:\n\n_navbar.html (the logout redirect, ~line 44)\nlogin.html (~lines 164 and 189)\nsetpassword.html (REPORTS_URL, ~line 211)\n\nSwap the Supabase credentials. Replace the OLD project URL https://plsrkfhxfzwzvrtciios.supabase.co and the OLD anon key sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ with the NEW Project URL and key from Phase 4, in all four files:\n\n_navbar.html (~line 32)\nreports.qmd (~line 11)\nlogin.html (SUPABASE_URL / SUPABASE_ANON, ~lines 156–157)\nsetpassword.html (SUPABASE_URL / SUPABASE_ANON, ~lines 208–209)\n\nAdd the deploy config. Create a file named .cpanel.yml in the repo root so Reclaim copies the built site into your web root. Replace USERNAME with the cPanel username:\n---\ndeployment:\n  tasks:\n    - export DEPLOYPATH=/home/USERNAME/public_html/\n    - /bin/cp -R docs/* $DEPLOYPATH\nRender, commit, and push:\nquarto render\ngit add -A\ngit commit -m \"Point site at real domain and official Supabase project; add cPanel deploy config\"\ngit push live main"
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-6-set-up-the-git-deployment-in-cpanel-this-replaces-the-old-code",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-6-set-up-the-git-deployment-in-cpanel-this-replaces-the-old-code",
+    "title": "The LIVE Project",
+    "section": "Phase 6 — Set up the Git deployment in cPanel (this replaces the old code)",
+    "text": "Phase 6 — Set up the Git deployment in cPanel (this replaces the old code)\nRequires your cPanel access from Phase 1.\n\ncPanel → Files → Git Version Control → Create.\nClone URL: the theliveproject repo.\n\nPublic repo: use the HTTPS URL (https://github.com/theliveproject/theliveproject.github.io.git).\nPrivate repo: generate an SSH key in cPanel (SSH Access), add it to GitHub as a deploy key, and use the SSH URL (git@github.com:...).\n\nClone path: a folder OUTSIDE public_html (e.g. repositories/live-site). The .cpanel.yml handles copying into public_html.\nDeploy: open the repo’s Manage → Pull or Deploy → Update from Remote, then Deploy HEAD Commit. This overwrites the old code currently in public_html with yours."
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-7-invite-real-users",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-7-invite-real-users",
+    "title": "The LIVE Project",
+    "section": "Phase 7 — Invite real users",
+    "text": "Phase 7 — Invite real users\nIn the new Supabase project: Authentication → Users → Invite User, enter each real user’s email. They’ll get the invite email (via Resend) → click the link → land on setpassword.html on your domain → set a password → get redirected to reports.html. (Optional: add their name/institution rows to the profiles table per ACCOUNT_SETUP_INSTRUCTIONS.md.)"
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-8-verify-everything",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#phase-8-verify-everything",
+    "title": "The LIVE Project",
+    "section": "Phase 8 — Verify everything",
+    "text": "Phase 8 — Verify everything\n\nVisit https://YOURDOMAIN.com and confirm the padlock (HTTPS) shows.\nClick every navbar link — Home, Overview, Our Team, Reports, Login.\nTest the full auth loop against the NEW Supabase project: invite a test user → set-password link lands on your domain → redirects to reports.html → log out works."
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#your-routine-after-launch-every-future-change",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#your-routine-after-launch-every-future-change",
+    "title": "The LIVE Project",
+    "section": "Your routine after launch (every future change)",
+    "text": "Your routine after launch (every future change)\n\nEdit your .qmd files in RStudio.\nquarto render (rebuilds docs/).\ngit add -A && git commit -m \"...\" then git push live main.\nIn cPanel → Git Version Control → Update from Remote → Deploy HEAD Commit.\n\n(Optional later: a GitHub Action can do step 4 automatically on every push, so you skip the cPanel clicks.)"
+  },
+  {
+    "objectID": "Claude instruction files/LAUNCH_CHECKLIST.html#one-thing-to-know-about-security",
+    "href": "Claude instruction files/LAUNCH_CHECKLIST.html#one-thing-to-know-about-security",
+    "title": "The LIVE Project",
+    "section": "One thing to know about security",
+    "text": "One thing to know about security\nThe Reports page is gated with client-side JavaScript, which means a determined visitor could still download the page by bypassing the script. If the reports contain anything truly sensitive, the real protection needs to be server-side — for example cPanel directory password protection, or serving the data through Supabase with row-level security — rather than a JavaScript redirect."
   }
 ]

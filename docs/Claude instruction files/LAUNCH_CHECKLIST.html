@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ines Kim – The LIVE Project</title>
+<title>launch_checklist – The LIVE Project</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -22,6 +22,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -169,24 +204,157 @@ ul.task-list li input[type="checkbox"] {
 })();
 </script>
 
-<header id="title-block-header">
-<h1 class="title display-7">Ines Kim</h1>
-
-</header>
 
 
-<div style="display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 2rem;">
-  <img src="../Images/Ines-Kim.jpg" style="width: 220px; border-radius: 4px; flex-shrink: 0;">
-  <div>
-    <h1 style="font-family: Fraunces; margin: 0 0 0 0;">Ines Kim</h1>
-    <p style="text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; color: #555; margin-top: 0.25rem;">
-    Undergraduate Research Assistant
-    </p>
-    <p>Ines Kim is a rising sophomore at Wheaton College (IL), where she is pursuing a Bachelor of Arts in Philosophy and Economics. She is a Politics, Philosophy, and Economics fellow in the Aequitas Fellows Program, a highly selective, four-year academic fellowship program at Wheaton College. After reading Dorothy Sayers' essay "Why Work?", she was inspired to research different philosophies regarding work, sparking an interest in the field of work and calling that continues to this day.</p>
-    </div>
-</div>
+
+<section id="launch-checklist-moving-the-live-project-site-to-reclaim-hosting" class="level1">
+<h1>Launch Checklist — Moving the LIVE Project Site to Reclaim Hosting</h1>
+<p>How the pieces fit together:</p>
+<ul>
+<li><strong>GitHub</strong> = where the code lives (source of truth). You push code here.</li>
+<li><strong>Reclaim Hosting (cPanel)</strong> = where the live site is served to visitors at your domain.</li>
+<li><strong>Quarto</strong> = builds your <code>.qmd</code> pages into the <code>docs/</code> folder. cPanel does NOT run Quarto — it only copies the already-built <code>docs/</code> folder. So you always render locally first.</li>
+<li><strong>Resend</strong> = sends the invite emails. You’ll create a NEW official account.</li>
+<li><strong>Supabase</strong> = handles login / set-password / gated reports. You’ll create a NEW official project (the current one is your personal/mock project).</li>
+</ul>
+<p>The domain is already connected to Reclaim and HTTPS is already active, so those steps are not in this list. Order matters: do the phases top to bottom — except Phase 1, which you should kick off immediately and let run in the background.</p>
+<hr>
+<section id="phase-1-request-cpanel-access-start-this-first-it-waits-on-your-supervisor" class="level2">
+<h2 data-anchor-id="phase-1-request-cpanel-access-start-this-first-it-waits-on-your-supervisor">Phase 1 — Request cPanel access (start this first, it waits on your supervisor)</h2>
+<p>Do this before anything else, because it depends on someone else responding and it unblocks both deployment (Phase 6) and the DNS records (Phase 7) — and DNS can take 24–48h to propagate, so the sooner the better. You can work through the other phases while you wait. You don’t need a new hosting account, and you should NOT share your supervisor’s main cPanel password.</p>
+<ol type="1">
+<li>Ask your supervisor to create you a <strong>Team User</strong> in cPanel (Manage Team → Create Team User).</li>
+<li>Request these privileges explicitly: the <strong>Web</strong> role (covers Git Version Control + File Manager) plus <strong>Git</strong> and <strong>Zone Editor</strong> access.
+<ul>
+<li>If Zone Editor can’t be granted to a team user, that’s fine — he can paste in the few DNS records for you (see Phase 7).</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+<section id="phase-2-move-the-code-to-the-projects-github-org" class="level2">
+<h2 data-anchor-id="phase-2-move-the-code-to-the-projects-github-org">Phase 2 — Move the code to the project’s GitHub org</h2>
+<ol type="1">
+<li><p>In RStudio, open the <strong>Terminal</strong> tab (Tools → Terminal → New Terminal — this is the shell, NOT the Console, which runs R). Confirm you’re in the project folder:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>        <span class="co"># should show your project path</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status <span class="co"># should list your files, not an error</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Add the org repo as a remote and push your code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add live https://github.com/theliveproject/theliveproject.github.io.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span>            <span class="co"># confirm "origin" AND "live" are both listed</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push live main       <span class="co"># use your real branch; if Git complains the repo isn't empty, see note</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Note: if the org repo already has placeholder content, either merge once, or force-push if it’s just an empty starter: <code>git push live main --force</code>.</li>
+</ul></li>
+<li><p>From now on, the <strong>theliveproject</strong> repo is your source of truth.</p></li>
+</ol>
+<hr>
+</section>
+<section id="phase-3-create-the-live-project-resend-account-and-verify-the-domain" class="level2">
+<h2 data-anchor-id="phase-3-create-the-live-project-resend-account-and-verify-the-domain">Phase 3 — Create the LIVE Project Resend account and verify the domain</h2>
+<p>Set up a fresh Resend account owned by the LIVE project (not personal), so the next phase can wire its API key into Supabase. Do the domain verification steps as early as possible — DNS propagation can take 24–48 hours.</p>
+<ol type="1">
+<li><strong>Create the official account</strong> at <a href="https://resend.com">resend.com</a>, ideally using a LIVE-project email (or one a supervisor controls) so it’s not tied to your personal account. The free tier (3,000 emails/month) is plenty for invites.</li>
+<li><strong>Create an API key:</strong> Resend → <strong>API Keys → Create API Key</strong>, and copy it somewhere safe — you’ll paste it into Supabase in Phase 4.</li>
+<li><strong>Create a subdomain for sending email</strong> (e.g., <code>mail.YOURDOMAIN.com</code>). This isolates your transactional email reputation from your main domain and avoids DNS conflicts if you ever add another email provider. You or your supervisor can create it in cPanel → <strong>Domains → Create a New Domain</strong> (or <strong>Subdomains</strong>), then use <code>mail.YOURDOMAIN.com</code> as the domain in the next step.</li>
+<li>In Resend → <strong>Domains → Add Domain</strong>, enter <code>mail.YOURDOMAIN.com</code> (your new subdomain). Resend gives you a set of TXT/CNAME/DKIM records.</li>
+<li>In cPanel → <strong>Domains → Zone Editor → Manage</strong> (your domain) → <strong>Add Record</strong>, paste each record Resend provided. Save.</li>
+<li>DNS changes can take up to 24–48 hours to propagate. Once Resend shows the domain as verified, the SMTP settings from Phase 4 step 4 will send successfully.</li>
+</ol>
+<hr>
+</section>
+<section id="phase-4-create-the-official-supabase-project" class="level2">
+<h2 data-anchor-id="phase-4-create-the-official-supabase-project">Phase 4 — Create the official Supabase project</h2>
+<p>Your current Supabase project is personal/mock. Create a fresh one owned by the LIVE project so it’s official and not tied to your personal account.</p>
+<ol type="1">
+<li><strong>Create the project.</strong> At <a href="https://supabase.com">supabase.com</a>, ideally under a LIVE-project organization/account (or one a supervisor owns), click <strong>New Project</strong>. Pick a name (e.g.&nbsp;<code>live-project</code>), set a strong database password, and choose a region close to your users.</li>
+<li><strong>Recreate the database schema.</strong> In <strong>SQL Editor</strong>, run the <code>profiles</code> table setup from your existing <code>ACCOUNT_SETUP_INSTRUCTIONS.md</code> (the <code>create table public.profiles ...</code> block and its row-level-security policy).</li>
+<li><strong>Set the auth URLs.</strong> In <strong>Authentication → URL Configuration</strong>:
+<ul>
+<li><strong>Site URL:</strong> <code>https://YOURDOMAIN.com/</code></li>
+<li><strong>Redirect URLs:</strong> add <code>https://YOURDOMAIN.com/setpassword.html</code></li>
+</ul></li>
+<li><strong>Configure email (SMTP via Resend).</strong> In <strong>Authentication → SMTP Settings</strong>, enable custom SMTP: host <code>smtp.resend.com</code>, port <code>465</code>, username <code>resend</code>, password = the Resend API key from Phase 3, sender <code>noreply@mail.YOURDOMAIN.com</code>. (Emails will actually send once the Resend domain is verified in Phase 7.)</li>
+<li><strong>Copy the new credentials.</strong> Go to <strong>Settings → API</strong> and copy the new <strong>Project URL</strong> and the <strong>publishable/anon key</strong>. You’ll paste these into the code in Phase 5.</li>
+<li><strong>Note on data:</strong> since the old project was mock, you’re starting users fresh — you’ll re-invite real users in Phase 8. (If you ever need to carry data over, export/import via the SQL Editor.)</li>
+</ol>
+<hr>
+</section>
+<section id="phase-5-prepare-the-code-new-domain-new-supabase-project" class="level2">
+<h2 data-anchor-id="phase-5-prepare-the-code-new-domain-new-supabase-project">Phase 5 — Prepare the code (new domain + new Supabase project)</h2>
+<ol type="1">
+<li><p><strong>Swap the domain URLs.</strong> Search the project for <code>https://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/</code> and change to <code>https://YOURDOMAIN.com/</code> in:</p>
+<ul>
+<li><code>_navbar.html</code> (the logout redirect, ~line 44)</li>
+<li><code>login.html</code> (~lines 164 and 189)</li>
+<li><code>setpassword.html</code> (<code>REPORTS_URL</code>, ~line 211)</li>
+</ul></li>
+<li><p><strong>Swap the Supabase credentials.</strong> Replace the OLD project URL <code>https://plsrkfhxfzwzvrtciios.supabase.co</code> and the OLD anon key <code>sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ</code> with the NEW Project URL and key from Phase 4, in all four files:</p>
+<ul>
+<li><code>_navbar.html</code> (~line 32)</li>
+<li><code>reports.qmd</code> (~line 11)</li>
+<li><code>login.html</code> (<code>SUPABASE_URL</code> / <code>SUPABASE_ANON</code>, ~lines 156–157)</li>
+<li><code>setpassword.html</code> (<code>SUPABASE_URL</code> / <code>SUPABASE_ANON</code>, ~lines 208–209)</li>
+</ul></li>
+<li><p><strong>Add the deploy config.</strong> Create a file named <code>.cpanel.yml</code> in the repo root so Reclaim copies the built site into your web root. Replace <code>USERNAME</code> with the cPanel username:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">deployment</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">tasks</span><span class="kw">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> export DEPLOYPATH=/home/USERNAME/public_html/</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> /bin/cp -R docs/* $DEPLOYPATH</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><strong>Render, commit, and push:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add <span class="at">-A</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Point site at real domain and official Supabase project; add cPanel deploy config"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push live main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<hr>
+</section>
+<section id="phase-6-set-up-the-git-deployment-in-cpanel-this-replaces-the-old-code" class="level2">
+<h2 data-anchor-id="phase-6-set-up-the-git-deployment-in-cpanel-this-replaces-the-old-code">Phase 6 — Set up the Git deployment in cPanel (this replaces the old code)</h2>
+<p>Requires your cPanel access from Phase 1.</p>
+<ol type="1">
+<li>cPanel → <strong>Files → Git Version Control → Create</strong>.</li>
+<li>Clone URL: the <strong>theliveproject</strong> repo.
+<ul>
+<li>Public repo: use the HTTPS URL (<code>https://github.com/theliveproject/theliveproject.github.io.git</code>).</li>
+<li>Private repo: generate an SSH key in cPanel (SSH Access), add it to GitHub as a deploy key, and use the SSH URL (<code>git@github.com:...</code>).</li>
+</ul></li>
+<li>Clone path: a folder OUTSIDE <code>public_html</code> (e.g.&nbsp;<code>repositories/live-site</code>). The <code>.cpanel.yml</code> handles copying into <code>public_html</code>.</li>
+<li>Deploy: open the repo’s <strong>Manage → Pull or Deploy → Update from Remote</strong>, then <strong>Deploy HEAD Commit</strong>. This overwrites the old code currently in <code>public_html</code> with yours.</li>
+</ol>
+<hr>
+</section>
+<section id="phase-7-invite-real-users" class="level2">
+<h2 data-anchor-id="phase-7-invite-real-users">Phase 7 — Invite real users</h2>
+<p>In the new Supabase project: <strong>Authentication → Users → Invite User</strong>, enter each real user’s email. They’ll get the invite email (via Resend) → click the link → land on <code>setpassword.html</code> on your domain → set a password → get redirected to <code>reports.html</code>. (Optional: add their name/institution rows to the <code>profiles</code> table per <code>ACCOUNT_SETUP_INSTRUCTIONS.md</code>.)</p>
+<hr>
+</section>
+<section id="phase-8-verify-everything" class="level2">
+<h2 data-anchor-id="phase-8-verify-everything">Phase 8 — Verify everything</h2>
+<ol type="1">
+<li>Visit <code>https://YOURDOMAIN.com</code> and confirm the padlock (HTTPS) shows.</li>
+<li>Click every navbar link — Home, Overview, Our Team, Reports, Login.</li>
+<li>Test the full auth loop against the NEW Supabase project: invite a test user → set-password link lands on your domain → redirects to <code>reports.html</code> → log out works.</li>
+</ol>
+<hr>
+</section>
+<section id="your-routine-after-launch-every-future-change" class="level2">
+<h2 data-anchor-id="your-routine-after-launch-every-future-change">Your routine after launch (every future change)</h2>
+<ol type="1">
+<li>Edit your <code>.qmd</code> files in RStudio.</li>
+<li><code>quarto render</code> (rebuilds <code>docs/</code>).</li>
+<li><code>git add -A &amp;&amp; git commit -m "..."</code> then <code>git push live main</code>.</li>
+<li>In cPanel → Git Version Control → <strong>Update from Remote</strong> → <strong>Deploy HEAD Commit</strong>.</li>
+</ol>
+<p>(Optional later: a GitHub Action can do step 4 automatically on every push, so you skip the cPanel clicks.)</p>
+<hr>
+</section>
+<section id="one-thing-to-know-about-security" class="level2">
+<h2 data-anchor-id="one-thing-to-know-about-security">One thing to know about security</h2>
+<p>The Reports page is gated with client-side JavaScript, which means a determined visitor could still download the page by bypassing the script. If the reports contain anything truly sensitive, the real protection needs to be server-side — for example cPanel directory password protection, or serving the data through Supabase with row-level security — rather than a JavaScript redirect.</p>
 
 
+</section>
+</section>
 
 
 <!-- Site footer — shared across all pages via _quarto.yml include-after-body -->

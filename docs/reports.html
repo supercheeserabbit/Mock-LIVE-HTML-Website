@@ -176,35 +176,6 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const { createClient } = supabase;
-  const client = createClient(
-    'https://plsrkfhxfzwzvrtciios.supabase.co',
-    'sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ'
-  );
-
-  async function checkAuthBeforeLoad() {
-    const { data: { session } } = await client.auth.getSession();
-    if (!session) {
-      window.location.href = 'login.html?redirect=reports.html';
-      return;
-    }
-
-    // Fetch institution from user profile
-    const { data: profile } = await client
-      .from('user_profiles')
-      .select('institution')      // ← adjust column name if different
-      .eq('id', session.user.id)
-      .single();
-
-    if (profile?.institution) {
-      document.querySelector('.page-title').textContent =
-        'Reports for ' + profile.institution;
-    }
-  }
-
-  checkAuthBeforeLoad();
-</script>
 <style>
   body {
     background-color: #f0f0ef;
@@ -294,84 +265,161 @@ ul.task-list li input[type="checkbox"] {
     height: 20px;
     flex-shrink: 0;
   }
+
+  .reports-status {
+    text-align: center;
+    color: #0d1f3c;
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding: 40px 0;
+    opacity: 0.6;
+  }
 </style>
 
 <div class="reports-page">
-  <h1 class="page-title">Reports for &lt;college&gt;</h1>
+  <h1 class="page-title">Reports</h1>
   <p class="page-subtitle">Download your reports as PDFs, or use the HTML dashboards to interact with specific elements of your data.</p>
-
-  <div class="reports-year-section">
-    <div class="reports-year-heading">2025 - 2026</div>
-
-    <div class="report-row">
-      <span class="report-name">Institutional Report Cohort 1</span>
-      <div class="report-actions">
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v13M7 11l5 5 5-5"></path>
-            <path d="M5 21h14"></path>
-          </svg>
-          Download PDF
-        </a>
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          View Dashboard
-        </a>
-      </div>
-    </div>
-
-    <div class="report-row">
-      <span class="report-name">Institutional Report Cohort 2</span>
-      <div class="report-actions">
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v13M7 11l5 5 5-5"></path>
-            <path d="M5 21h14"></path>
-          </svg>
-          Download PDF
-        </a>
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          View Dashboard
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="reports-year-section">
-    <div class="reports-year-heading">2024 - 2025</div>
-
-    <div class="report-row">
-      <span class="report-name">Institutional Report Cohort 1</span>
-      <div class="report-actions">
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3v13M7 11l5 5 5-5"></path>
-            <path d="M5 21h14"></path>
-          </svg>
-          Download PDF
-        </a>
-        <a href="#" class="report-btn">
-          <svg viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-          View Dashboard
-        </a>
-      </div>
-    </div>
+  <div id="reports-container">
+    <p class="reports-status">Loading reports…</p>
   </div>
 </div>
 
 <script src="script.js"></script>
 <script>
+  const { createClient } = supabase;
+  const client = createClient(
+    'https://plsrkfhxfzwzvrtciios.supabase.co',
+    'sb_publishable_2spGzG3-1-xfAGai7r_SSQ_h3TkSHXJ'
+  );
+
+  const BUCKET = 'Reports';
+
+  function formatDisplayName(filename) {
+    return filename
+      .replace(/\.pdf$/i, '')
+      .replace(/_/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  function formatYearHeading(folderName) {
+    // "2024-2025" → "2024 - 2025"
+    return folderName.replace(/^(\d{4})-(\d{4})$/, '$1 - $2');
+  }
+
+  async function downloadReport(path) {
+    const { data, error } = await client.storage
+      .from(BUCKET)
+      .createSignedUrl(path, 60); // URL valid for 60 seconds
+    if (error) {
+      alert('Could not generate download link. Please try again.');
+      console.error(error);
+      return;
+    }
+    const a = document.createElement('a');
+    a.href = data.signedUrl;
+    a.download = path.split('/').pop();
+    a.click();
+  }
+
+  function buildReportRow(displayName, filePath) {
+    const row = document.createElement('div');
+    row.className = 'report-row';
+    row.innerHTML = `
+      <span class="report-name">${displayName}</span>
+      <div class="report-actions">
+        <button class="report-btn download-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v13M7 11l5 5 5-5"/>
+            <path d="M5 21h14"/>
+          </svg>
+          Download PDF
+        </button>
+        <a href="#" class="report-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          View Dashboard
+        </a>
+      </div>
+    `;
+    row.querySelector('.download-btn').addEventListener('click', () => downloadReport(filePath));
+    return row;
+  }
+
+  async function loadReports() {
+    const { data: { session } } = await client.auth.getSession();
+    if (!session) {
+      window.location.href = 'login.html?redirect=reports.html';
+      return;
+    }
+
+    // Get user's institution
+    const { data: profile, error: profileError } = await client
+      .from('user_profiles')
+      .select('institution')
+      .eq('id', session.user.id)
+      .single();
+
+    const container = document.getElementById('reports-container');
+
+    if (profileError || !profile?.institution) {
+      container.innerHTML = '<p class="reports-status">Could not load your institution profile.</p>';
+      return;
+    }
+
+    const institution = profile.institution;
+    document.querySelector('.page-title').textContent = 'Reports for ' + institution;
+
+    // List year folders at bucket root
+    const { data: rootItems, error: listError } = await client.storage
+      .from(BUCKET)
+      .list('', { limit: 100, sortBy: { column: 'name', order: 'desc' } });
+
+    if (listError || !rootItems) {
+      container.innerHTML = '<p class="reports-status">Could not load reports.</p>';
+      return;
+    }
+
+    // Folders have no file metadata (id is null)
+    const yearFolders = rootItems.filter(item => item.id === null);
+
+    let anyReports = false;
+    container.innerHTML = '';
+
+    for (const yearFolder of yearFolders) {
+      const year = yearFolder.name;
+      const folderPath = `${year}/${institution}`;
+
+      const { data: files } = await client.storage
+        .from(BUCKET)
+        .list(folderPath, { limit: 100 });
+
+      const pdfs = (files || []).filter(f => f.name.toLowerCase().endsWith('.pdf'));
+      if (pdfs.length === 0) continue;
+
+      anyReports = true;
+
+      const section = document.createElement('div');
+      section.className = 'reports-year-section';
+      section.innerHTML = `<div class="reports-year-heading">${formatYearHeading(year)}</div>`;
+
+      for (const file of pdfs) {
+        const displayName = formatDisplayName(file.name);
+        const filePath = `${folderPath}/${file.name}`;
+        section.appendChild(buildReportRow(displayName, filePath));
+      }
+
+      container.appendChild(section);
+    }
+
+    if (!anyReports) {
+      container.innerHTML = '<p class="reports-status">No reports available for your institution yet.</p>';
+    }
+  }
+
   checkAuthStatus();
+  loadReports();
 </script>
 
 
