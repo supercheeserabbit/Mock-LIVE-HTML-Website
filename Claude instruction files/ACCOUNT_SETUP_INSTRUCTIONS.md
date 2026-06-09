@@ -54,24 +54,22 @@ This ensures the invite email link lands on `setpassword.html` instead of Supaba
 
 ---
 
-## 4. Configure email via Mailtrap
+## 4. Configure email via Resend
 
-Supabase's built-in email is limited to ~2 invites/hour. Use Mailtrap's **Email Sending** service (not the sandbox/testing inbox) to remove that limit.
-
-> **Important:** Mailtrap has two products — *Email Testing* (catches emails in a sandbox) and *Email Sending* (delivers to real inboxes). You need **Email Sending** for users to actually receive invites.
+Supabase's built-in email is limited to ~2 invites/hour. Use Resend to remove that limit (free tier: 3,000 emails/month). Requires a real domain you own.
 
 ### Steps
 
-1. Sign up at [mailtrap.io](https://mailtrap.io) and go to **Email Sending → Domains**
-2. Add and verify your sending domain (e.g., `yourdomain.com`)
-3. Go to **Email Sending → SMTP/API Settings** and copy your SMTP credentials
+1. Sign up at [resend.com](https://resend.com) and go to **Domains → Add Domain**
+2. Add and verify your sending domain (e.g., `yourdomain.com`) by adding the DNS records Resend provides
+3. Go to **API Keys → Create API Key** and copy it
 4. In **Supabase Dashboard → Authentication → SMTP Settings**:
    - Toggle **Enable Custom SMTP** on
-   - **Host:** `live.smtp.mailtrap.io`
-   - **Port:** `587`
-   - **Username:** `api`
-   - **Password:** your Mailtrap API token
-   - **Sender email:** a verified address from your Mailtrap domain (e.g., `noreply@yourdomain.com`)
+   - **Host:** `smtp.resend.com`
+   - **Port:** `465`
+   - **Username:** `resend`
+   - **Password:** your Resend API key
+   - **Sender email:** a verified address from your domain (e.g., `noreply@yourdomain.com`)
    - **Sender name:** whatever you want users to see (e.g., `Work as Calling Research`)
 5. Save and send a test invite to confirm delivery
 

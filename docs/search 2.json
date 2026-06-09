@@ -21,11 +21,11 @@
     "text": "3. Add the invite redirect URL to Supabase\nGo to Supabase Dashboard → Authentication → URL Configuration → Redirect URLs and add:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/setpassword.html\nAlso set Site URL to:\nhttps://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/\nThis ensures the invite email link lands on setpassword.html instead of Supabase’s default page."
   },
   {
-    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
-    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-resend",
+    "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-mailtrap",
+    "href": "ACCOUNT_SETUP_INSTRUCTIONS.html#configure-email-via-mailtrap",
     "title": "The LIVE Project",
-    "section": "4. Configure email via Resend",
-    "text": "4. Configure email via Resend\nSupabase’s built-in email is limited to ~2 invites/hour. Use Resend to remove that limit (free tier: 3,000 emails/month). Requires a real domain you own.\n\nSteps\n\nSign up at resend.com and go to Domains → Add Domain\nAdd and verify your sending domain (e.g., yourdomain.com) by adding the DNS records Resend provides\nGo to API Keys → Create API Key and copy it\nIn Supabase Dashboard → Authentication → SMTP Settings:\n\nToggle Enable Custom SMTP on\nHost: smtp.resend.com\nPort: 465\nUsername: resend\nPassword: your Resend API key\nSender email: a verified address from your domain (e.g., noreply@yourdomain.com)\nSender name: whatever you want users to see (e.g., Work as Calling Research)\n\nSave and send a test invite to confirm delivery"
+    "section": "4. Configure email via Mailtrap",
+    "text": "4. Configure email via Mailtrap\nSupabase’s built-in email is limited to ~2 invites/hour. Use Mailtrap’s Email Sending service (not the sandbox/testing inbox) to remove that limit.\n\nImportant: Mailtrap has two products — Email Testing (catches emails in a sandbox) and Email Sending (delivers to real inboxes). You need Email Sending for users to actually receive invites.\n\n\nSteps\n\nSign up at mailtrap.io and go to Email Sending → Domains\nAdd and verify your sending domain (e.g., yourdomain.com)\nGo to Email Sending → SMTP/API Settings and copy your SMTP credentials\nIn Supabase Dashboard → Authentication → SMTP Settings:\n\nToggle Enable Custom SMTP on\nHost: live.smtp.mailtrap.io\nPort: 587\nUsername: api\nPassword: your Mailtrap API token\nSender email: a verified address from your Mailtrap domain (e.g., noreply@yourdomain.com)\nSender name: whatever you want users to see (e.g., Work as Calling Research)\n\nSave and send a test invite to confirm delivery"
   },
   {
     "objectID": "ACCOUNT_SETUP_INSTRUCTIONS.html#verify-the-flow",
