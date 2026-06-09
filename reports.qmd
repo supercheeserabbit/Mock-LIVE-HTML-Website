@@ -44,7 +44,7 @@ format: html
 
   .reports-year-heading {
     font-size: 2.2rem;
-    font-weight: 700;
+    font-weight: 400;
     color: #0d1f3c;
     font-family: 'Georgia', serif;
     margin-bottom: 16px;
