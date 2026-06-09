@@ -114,7 +114,7 @@ format: html
   </div>
 </div>
 
-<script src="script.js"></script>
+
 <script>
   const { createClient } = supabase;
   const client = createClient(
@@ -248,7 +248,7 @@ format: html
     }
   }
 
-  checkAuthStatus();
+
   loadReports();
 </script>
 ```
