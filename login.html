@@ -122,6 +122,17 @@
     }
 
     .error-msg.visible { display: block; }
+    
+    .paragraph {
+      color: #a6a6a6;
+      font-size: 0.80rem;
+      margin-top: 0.70rem;
+      text-align: center;
+    }
+    .paragraph a {
+      color: inherit;
+      text-decoration: underline;
+    }
 
   </style>
 </head>
@@ -146,6 +157,11 @@
       <button class="btn" type="submit" id="submit-btn">Log In</button>
 
       <div class="error-msg" id="error-msg"></div>
+      
+      <div>
+        <p class="paragraph">Forgot your password? Contact us at our <a href="mailto:live_project@colostate.edu">email</a>.</p>
+      </div>
+      
     </form>
   </div>
 
@@ -186,7 +202,7 @@
         btn.disabled = false;
         btn.textContent = 'Sign In';
       } else {
-        window.location.href = 'https://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/reports.html'; // change to your protected page
+        window.location.href = 'https://supercheeserabbit.github.io/Mock-LIVE-HTML-Website/'; 
       }
     });
   </script>
